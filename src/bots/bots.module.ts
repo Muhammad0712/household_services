@@ -1,13 +1,14 @@
-import { Module } from '@nestjs/common';
-import { BotsService } from './bots.service';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Bot } from './models/bot.model';
-import { BotsUpdate } from './bots.update';
+import { Module } from "@nestjs/common";
+import { BotsService } from "./bots.service";
+import { SequelizeModule } from "@nestjs/sequelize";
+import { Client } from "./models/client.model";
+import { BotsUpdate } from "./bots.update";
+import { Worker } from "./models/worker.model";
 
-@Module({ 
-  imports: [SequelizeModule.forFeature([Bot])],
+@Module({
+  imports: [SequelizeModule.forFeature([Client, Worker])],
   controllers: [],
   providers: [BotsService, BotsUpdate],
-  exports: [BotsService]
+  exports: [BotsService],
 })
 export class BotsModule {}

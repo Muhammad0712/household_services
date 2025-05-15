@@ -1,10 +1,12 @@
-import { Module } from '@nestjs/common';
-import { BotsModule } from './bots/bots.module';
-import { ConfigModule } from '@nestjs/config';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Bot } from './bots/models/bot.model';
-import { TelegrafModule } from 'nestjs-telegraf';
-import { BOT_NAME } from './app.constants';
+import { Module } from "@nestjs/common";
+import { BotsModule } from "./bots/bots.module";
+import { ConfigModule } from "@nestjs/config";
+import { SequelizeModule } from "@nestjs/sequelize";
+import { Client } from "./bots/models/client.model";
+import { TelegrafModule } from "nestjs-telegraf";
+import { BOT_NAME } from "./app.constants";
+import { SmsModule } from "./sms/sms.module";
+import { Worker } from "./bots/models/worker.model";
 
 @Module({
   imports: [
@@ -26,12 +28,13 @@ import { BOT_NAME } from './app.constants';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DB,
-      models: [Bot],
+      models: [Client, Worker],
       autoLoadModels: true,
       sync: { alter: true },
       logging: false,
     }),
     BotsModule,
+    SmsModule,
   ],
   controllers: [],
   providers: [],

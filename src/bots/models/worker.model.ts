@@ -1,6 +1,6 @@
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
-interface IBotCreationAttr {
+interface IWorkerCreationAttr {
   user_id: number;
   username: string;
   first_name: string;
@@ -8,8 +8,8 @@ interface IBotCreationAttr {
   lang: string;
 }
 
-@Table({ tableName: "bots", timestamps: false })
-export class Bot extends Model<Bot, IBotCreationAttr> {
+@Table({ tableName: "workers", timestamps: false })
+export class Worker extends Model<Worker, IWorkerCreationAttr> {
   @Column({
     type: DataType.BIGINT,
     primaryKey: true,
@@ -42,13 +42,20 @@ export class Bot extends Model<Bot, IBotCreationAttr> {
   declare lang: string;
 
   @Column({
-    type: DataType.STRING,
-  })
-  declare address: string;
-
-  @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
   })
   declare status: boolean;
+
+  @Column({
+    type: DataType.STRING,
+    defaultValue: false,
+  })
+  declare job: string;
+
+  @Column({
+    type: DataType.ENUM("worker", "client"),
+    defaultValue: "worker",
+  })
+  declare role: string;
 }
