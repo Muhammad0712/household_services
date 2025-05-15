@@ -112,7 +112,23 @@ export class BotsService {
               .resize()
           );
         } else {
-
+          ctx.deleteMessage()
+          await ctx.replyWithHTML(
+            `O'zingizga kerakli xizmat turini tanlang! Ortga qaytish uchun <b>Ortga qaytish tugmasini bosing!</b>`,
+            Markup.inlineKeyboard([
+              [Markup.button.callback(" Santexnik xizmati", "SANTEXNIK")],
+              [Markup.button.callback(" Elektrik xizmati", "ELEKTRIK")],
+              [Markup.button.callback(" Gaz xizmati", "GAZ")],
+              [Markup.button.callback(" Tamirlash xizmati", "TAMIRLASH")],
+              [
+                Markup.button.callback(
+                  " Uskunalarni tuzatish xizmati",
+                  "USKUNALAR"
+                ),
+              ],
+              [Markup.button.callback("Ortga qaytish", "BACK_TO_MAIN_MENU")],
+            ])
+          );
         }
       } else {
         await this.clientModel.create({
